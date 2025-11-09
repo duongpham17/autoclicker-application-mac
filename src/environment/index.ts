@@ -6,11 +6,11 @@ export const website = {
 };
 
 export const base_url =  {
-    production: "https://autoclicker-f60h.onrender.com/api",
+    production: "https://www.theautoclicker.com/api",
     development: "http://localhost:8000/api"
 };
 
 export const base_url_server =  {
-    production: "https://autoclicker-f60h.onrender.com",
+    production: "https://www.theautoclicker.com",
     development: "http://localhost:8000"
 };
