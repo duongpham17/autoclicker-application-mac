@@ -9,7 +9,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "electron": "electron .",
-    "dev": "concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
+    "dev": "cross-env NODE_ENV=production concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
     "dist": "cross-env NODE_ENV=production npx electron-builder"
   },
   "dependencies": {
