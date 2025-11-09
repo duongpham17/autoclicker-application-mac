@@ -14,7 +14,7 @@ import Colorblock from '@components/colorblock/Style1';
 
 const Actions = ({script}: {script: IScriptsApi}) => {
 
-    const {setIsTerminal, setEdit, setScript, onUpdateScript, loading} = useContext(Context);
+    const {setIsTerminal, setEdit, setScript, onUpdateScript, loading, isEdited, onSaveScript, onDeleteScript} = useContext(Context);
 
     const [position, setPosition] = useState(-1);
 
@@ -42,18 +42,15 @@ const Actions = ({script}: {script: IScriptsApi}) => {
         onUpdateScript(newScript);
     };
 
-    const onClear = () => {
-        const newScript = { ...script };
-        newScript.commands = [];
-        onUpdateScript(newScript)
-    };
-
     return (
         <div className={styles.container}>
 
             {!!script.commands.length &&
                 <div className={styles.run}>
-                    <Button label1={`Run Script [ ${script.commands.length} / 100 ]`} onClick={() => setIsTerminal(true)} color="dark" />
+                    { !isEdited 
+                        ? <Button label1={`Run Script [ ${script.commands.length} / 100 ]`} onClick={() => setIsTerminal(true)} color="dark" />
+                        : <Button label1={`Save changes`} onClick={onSaveScript} color="primary" />
+                    }
                 </div>
             }
 
@@ -162,7 +159,7 @@ const Actions = ({script}: {script: IScriptsApi}) => {
 
             <Line />
             
-            {script.commands.length >= 5 && <Button label1="Delete all commands" warning color="red" onClick={onClear} loading={loading}/>}
+            {script.commands.length >= 2 && <Button label1="Delete Script" warning color="red" onClick={onDeleteScript} loading={loading}/>}
 
         </div>
     )

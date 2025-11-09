@@ -13,8 +13,12 @@ export interface PropsTypes {
     setIsTerminal: React.Dispatch<React.SetStateAction<boolean>>,
     edit: IScriptsCommands | null,
     setEdit: React.Dispatch<React.SetStateAction<IScriptsCommands | null>>,
+    isEdited: boolean,
+    setIsEdited: React.Dispatch<React.SetStateAction<boolean>>,
     onCreateScript: () => Promise<void>,
-    onUpdateScript: (data: IScriptsApi) => Promise<void>
+    onUpdateScript: (data: IScriptsApi) => Promise<void>,
+    onSaveScript: () => Promise<void>,
+    onDeleteScript: () => Promise<void>
 };
 
 // for consuming in children components, initial return state
@@ -27,8 +31,12 @@ export const Context = createContext<PropsTypes>({
     setIsTerminal: () => null,
     edit: null,
     setEdit: () => null,
+    isEdited: false,
+    setIsEdited: () => null,
     onCreateScript: async () => {},
-    onUpdateScript: async (data: IScriptsApi) => {}
+    onUpdateScript: async (data: IScriptsApi) => {},
+    onSaveScript: async () => {},
+    onDeleteScript: async () => {}
 });
 
 const UseContextMain = ({children}: {children: React.ReactNode}) => {
@@ -40,6 +48,7 @@ const UseContextMain = ({children}: {children: React.ReactNode}) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [isTerminal, setIsTerminal] = useState<boolean>(false);
     const [edit, setEdit] = useState<IScriptsCommands | null>(null);
+    const [isEdited, setIsEdited] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -64,8 +73,25 @@ const UseContextMain = ({children}: {children: React.ReactNode}) => {
 
     const onUpdateScript = async (data: IScriptsApi) => {
         setLoading(true);
-        const newData = await dispatch(Scripts.update(data));
-        setScript(newData);
+        setScript(data);
+        setIsEdited(true);
+        setLoading(false);
+    };
+
+    const onSaveScript = async () => {
+        if(!script) return;
+        setLoading(true);
+        await dispatch(Scripts.update(script));
+        setIsEdited(false);
+        setLoading(false);
+    };
+
+    const onDeleteScript = async () => {
+        if(!script) return;
+        setLoading(true);
+        await dispatch(Scripts.remove(script._id));
+        setIsEdited(false);
+        setScript(null);
         setLoading(false);
     };
 
@@ -78,8 +104,12 @@ const UseContextMain = ({children}: {children: React.ReactNode}) => {
         setIsTerminal,
         edit,
         setEdit,
+        isEdited,
+        setIsEdited,
         onCreateScript,
-        onUpdateScript
+        onUpdateScript,
+        onSaveScript,
+        onDeleteScript
     };
 
     return (

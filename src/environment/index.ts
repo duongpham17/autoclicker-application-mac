@@ -1,4 +1,4 @@
-export const environment = "production"
+export const environment = process.env.NODE_ENV as "development" | "production";
 
 export const website = {
     Name: "Autoclicker",

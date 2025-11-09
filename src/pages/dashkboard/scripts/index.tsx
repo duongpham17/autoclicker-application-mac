@@ -3,8 +3,6 @@ import Sidebar from './sidebar';
 import Main from './main';
 
 const Scripts = () => {
-  
-
   return (
     <div className={styles.container}>
       <section className={styles.sidebar}>
