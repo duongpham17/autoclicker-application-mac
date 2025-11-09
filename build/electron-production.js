@@ -14,7 +14,7 @@ function start(){
       minHeight: 500,
       maxWidth: 1000,
       webPreferences: {
-        nodeIntegration: false,
+        nodeIntegration: true,
         contextIsolation: true,
         preload: path.join(__dirname, 'preload.js'),
       },

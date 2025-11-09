@@ -17,6 +17,7 @@ function start(){
       maxWidth: 1000,
       webPreferences: {
         nodeIntegration: true,
+        contextIsolation: true,
         preload: path.join(__dirname, 'preload.js'),
       },
       icon: path.join(__dirname, 'logo64.png'),
