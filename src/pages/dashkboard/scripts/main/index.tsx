@@ -14,7 +14,7 @@ const Main = () => {
 
   const {script} = useContext(Context);
 
-  if(!script) return <Flex><BsArrowLeft/><Text message="Select a script to start."/></Flex>
+  if(!script) return <Flex><BsArrowLeft/><Text message="Select a script to get started"/></Flex>
 
   return (
   <Fragment>
