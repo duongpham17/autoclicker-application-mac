@@ -1,5 +1,12 @@
 Packaging the application
 
+Before releasing
+1) change package.json version
+2) check public/electron.js is set to production
+3) npm run build
+4) git add . -> ... -> git push
+5) npm run dist
+
 ```
 npm run dist
 ```
