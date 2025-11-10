@@ -11,7 +11,7 @@ const Main = () => {
 
   const {script} = useContext(Context);
 
-  if(!script) return <div><Text message="Select a script to start."/></div>
+  if(!script) return <div><Text message="<- Select a script to start."/></div>
 
   return (
   <Fragment>
