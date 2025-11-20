@@ -10,6 +10,11 @@ export const authentication = (state = initialState, action: ACTIONS) => {
     const {type, payload} = action;
 
     switch(type){
+        case TYPES.AUTHENTICATIONS_UPDATE:
+            return{
+                ...state,
+                user: payload
+            };
         case TYPES.AUTHENTICATIONS_SIGNIN:
             return{
                 ...state,
@@ -48,7 +53,8 @@ export const authentication = (state = initialState, action: ACTIONS) => {
         case TYPES.AUTHENTICATIONS_RESPONSE_CLEAR:
             return{
                 ...state,
-               [payload.key]: payload.value,
+                status: {},
+                errors: {},
             }
         default: 
             return state;

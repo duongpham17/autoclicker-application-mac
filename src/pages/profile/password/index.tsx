@@ -53,7 +53,7 @@ const Password = () => {
 
   async function callback(){
     const isPasswordCorrect = values.password === values.check_password;
-    if(!isPasswordCorrect) return dispatch(Users.state_errors("password", "Password does not match"));
+    if(!isPasswordCorrect) return dispatch(Users.stateErrors("password", "Password does not match"));
     await dispatch(Users.password(values.password));
     onClear();
   };
@@ -66,7 +66,7 @@ const Password = () => {
         {open && <Cover open={open} onClose={onOpen}>
             <Form onSubmit={onSubmit}>
 
-                {status.password && <Container color="green"><br/><Text message={status.password} color="green" /><br/></Container>}
+                {status.password && <Container color="green"><br/><Text color="green">{status.password}</Text><br/></Container>}
 
                 <Container>
                   <Input 
@@ -90,16 +90,11 @@ const Password = () => {
                   />
                 </Container>
 
-                {errors.password && <Container color="red"><br/><Text message={errors.password} color='red'/><br/></Container>}
+                {errors.password && <Container color="red"><br/><Text color='red'>{errors.password}</Text><br/></Container>}
 
                 {edited &&
                   <Container>
-                    <Button 
-                      type="submit" 
-                      label1={"Reset Password"}
-                      loading={loading} 
-                      color="primary" 
-                    />
+                    <Button type="submit" loading={loading} color="primary">Reset Password</Button>
                   </Container>
                 }
 

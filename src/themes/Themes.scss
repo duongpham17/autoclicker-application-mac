@@ -21,9 +21,9 @@ div, section, main, form, header, nav, footer, nav, table, tr, td, title, summar
     color: rgba(128, 128, 128, 0.377);
 }
 
-.theme-night{
-    --primary: rgb(96, 66, 215);
-    --primary-light: rgba(96, 66, 215, 0.797);
+.theme-purple{
+    --primary: #843bf1;
+    --primary-light: #a175e3c9;
     --background: #141414;
     --text: white;
     --text-light: #c3c3c3e1;
@@ -38,9 +38,9 @@ div, section, main, form, header, nav, footer, nav, table, tr, td, title, summar
     --yellow: yellow;
 }
 
-.theme-ocean{
+.theme-blue{
     --primary: #0340f9;
-    --primary-light: #1348e8c6;
+    --primary-light: #4664bfc6;
     --background: #171717;
     --text: white;
     --text-light: #c3c3c3e1;
@@ -55,9 +55,9 @@ div, section, main, form, header, nav, footer, nav, table, tr, td, title, summar
     --yellow: yellow;
 }
 
-.theme-retro{
+.theme-grey{
     --primary: #d1cfcfe1;
-    --primary-light: #eeededf4;
+    --primary-light: #bfbbbbc6;
     --background: #1e1e1e;
     --text: rgb(255, 255, 255);
     --text-light: #bbbbbbe1;
@@ -72,9 +72,9 @@ div, section, main, form, header, nav, footer, nav, table, tr, td, title, summar
     --yellow: yellow;
 }
 
-.theme-matrix{
+.theme-green{
     --primary: #3bd723e1;
-    --primary-light: #70ee75e1;
+    --primary-light: #52b555d9;
     --background: #121111;
     --text: rgb(255, 255, 255);
     --text-light: #bcbcbce1;
@@ -106,7 +106,7 @@ div, section, main, form, header, nav, footer, nav, table, tr, td, title, summar
     --yellow: yellow;
 };
 
-.theme-sun{
+.theme-orange{
     --primary: #f3550d;
     --primary-light: #ec7741;
     --background: #181818ff;
@@ -123,9 +123,9 @@ div, section, main, form, header, nav, footer, nav, table, tr, td, title, summar
     --yellow: yellow;
 }
 
-.theme-blood{
+.theme-red{
     --primary: #f30d0d;
-    --primary-light: #ec7741;
+    --primary-light: #df6f60ec;
     --background: #000000;
     --text: rgb(255, 255, 255);
     --text-light: #bcbcbce1;
@@ -140,9 +140,9 @@ div, section, main, form, header, nav, footer, nav, table, tr, td, title, summar
     --yellow: yellow;
 }
 
-.theme-thunder{
-    --primary: #e8cd1b;
-    --primary-light: #f3e700d4;
+.theme-yellow{
+    --primary: #edd329;
+    --primary-light: #dfd976d4;
     --background: #141414ff;
     --text: rgb(255, 255, 255);
     --text-light: #bcbcbce1;

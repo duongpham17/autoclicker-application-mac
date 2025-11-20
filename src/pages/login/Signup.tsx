@@ -9,24 +9,27 @@ import Text from '@components/texts/Style1';
 import Container from '@components/containers/Style1';
 
 interface Validation {
-  email?: string,
+  username?: string,
   password?: string,
   check_password?: string,
-}
+};
 
 const validation = (values: Validation) => {
     let errors: Validation = {};
 
     const check = (key: any) => key in values;
 
-    if(check("email")){
-        if(!values.email) {
-          errors.email = "required";
-        }
-        else if(!/\S+@\S+\.\S+/.test(values.email)){
-          errors.email = "Invalid email address"
-        }
-    };
+    if (check("username")) {
+      if (!values.username) {
+        errors.username = "required";
+      } 
+      else if (values.username.length < 3) {
+        errors.username = "Must be at least 3 characters";
+      } 
+      else if (!/^[a-z0-9]+$/i.test(values.username)) {
+        errors.username = "Only letters and numbers allowed";
+      }
+    }
     if(check("password")){
       if(!values.password) {
         errors.password = "required";
@@ -44,13 +47,13 @@ const Signup = () => {
 
     const {errors} = useAppSelector(state => state.authentications);
 
-    const initalState = { email: "", password: "", check_password: ""};
+    const initalState = { username: "", password: "", check_password: ""};
 
     const {values, onChange, onSubmit, loading, validationErrors} = useForm(initalState, callback, validation);
 
     async function callback(){
       const isPasswordCorrect = values.password === values.check_password;
-      if(!isPasswordCorrect) return dispatch(Authentication.state_errors("signup", "Password does not match"));
+      if(!isPasswordCorrect) return dispatch(Authentication.stateErrors("signup", "Password does not match"));
       await dispatch(Authentication.signup(values));
     };
 
@@ -58,14 +61,13 @@ const Signup = () => {
     <Fragment>
       <Form onSubmit={onSubmit}>
 
-
         <Input 
-          label1="Email address" 
-          label2={validationErrors.email}
-          error={validationErrors.email} 
-          placeholder="Enter your email address"
-          name="email" 
-          value={values.email} 
+          label1="Username" 
+          label2={validationErrors.username}
+          error={validationErrors.username} 
+          placeholder="Enter your username"
+          name="username" 
+          value={values.username} 
           onChange={onChange} 
         />
 
@@ -89,14 +91,9 @@ const Signup = () => {
           onChange={onChange} 
         />
 
-        {errors.signup && <Container color="red"><Text message={errors.signup} color='red'/></Container>}
+        {errors.signup && <Container color="red"><Text color='red'>{errors.signup}</Text></Container>}
 
-        <Button 
-          type="submit" 
-          label1={"Create account"}
-          loading={loading} 
-          color="primary" 
-        />
+        <Button type="submit" loading={loading} color="primary">Create account</Button>
 
       </Form>
     </Fragment>

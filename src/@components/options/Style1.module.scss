@@ -1,5 +1,6 @@
 .container{
     width: 100%;
+    margin: 0.5rem 0;
 
     .labels{
         display: flex;
@@ -11,14 +12,15 @@
     }
 
     select {
+        height: 35px;
         padding: 0.5rem;
         width: 100%;
         transition: 0.2s ease-in-out;
         border: 1px solid var(--light);
         background-color: var(--light);;
         outline: none;
-        margin-bottom: 0.5rem;
         cursor: pointer;
+        box-sizing: border-box;
 
         &:hover{
             border: 1px solid var(--primary);

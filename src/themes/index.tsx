@@ -9,16 +9,13 @@ export interface PropsTypes {
 };
 
 export const Context = createContext<PropsTypes>({
-    theme: {
-        name: "night",
-        background: "black",
-    },
+    theme: { name: "purple", background: "141414"},
     onSetTheme: () => null
 });
 
 export const Theme = ({children}: {children: ReactNode}) => {
 
-    const _default_ = Styling.night;
+    const _default_ = Styling.purple;
 
     const saved: ThemeTypes = themeLocalstorage.get();
 

@@ -18,7 +18,7 @@ const LoginPage = () => {
   const {user, status} = useAppSelector(state => state.authentications);
 
   const onNavbar = (name: string ) => {
-    dispatch(Authentication.state_clear("errors", {}));
+    dispatch(Authentication.stateClear());
     setNavbar(name);
   };
 

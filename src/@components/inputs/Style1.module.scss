@@ -1,28 +1,30 @@
 .container{
     width: 100%;
+    margin: 0.5rem 0;
 
     input{
+        height: 35px;
         padding: 0.5rem;
         width: 100%;
         transition: 0.2s ease-in-out;
-        box-sizing: border-box;
         border: 1px solid var(--light);
         background-color: var(--light);;
-        margin-bottom: 0.5rem;
-        
+        outline: none;
+        box-sizing: border-box;
+
         &:hover{
-            border-color: var(--primary);
+            border: 1px solid var(--primary);
         }
     }
     input[type="color"] {
         -webkit-appearance: none;
-        height: 36px;
+        height: 35px;
         cursor: pointer;
+        padding: 0.2rem;
     };
-
+    
     p{
         width: 100%;
-        font-weight: 200;
         span, small{
             color: var(--text-light)
         }

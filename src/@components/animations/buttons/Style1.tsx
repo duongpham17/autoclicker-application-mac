@@ -10,8 +10,8 @@ interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLB
 const Style1 = ({open, children, ...props}: Props) => {
   return (
     <button className={styles.container} {...props}>
-        <span>{children}</span>
-        <AiOutlinePlus className={open?styles.iconOpen:""}/>
+        <div>{children}</div>
+        <AiOutlinePlus className={open?styles.open:""}/>
     </button>
   )
 }

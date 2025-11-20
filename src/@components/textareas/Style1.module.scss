@@ -1,15 +1,14 @@
 .container{
     width: 100%;
+    margin: 0.5rem 0;
 
     textarea{
         padding: 0.5rem;
-        margin-bottom: 0.5rem;
         width: 100%;
         box-sizing: border-box;
         background-color: var(--light);
         resize: vertical;
         max-height: 400px;
-        min-height: 50px;
         font-family: inherit;
         border: 1px solid var(--light);
 

@@ -1,5 +1,3 @@
-"use client"
-
 import styles from './Style1.module.scss';
 import React, {ReactNode, ReactElement} from 'react';
 

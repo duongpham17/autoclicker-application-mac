@@ -9,25 +9,26 @@ import Form from '@components/forms/Style1';
 import Container from '@components/containers/Style1';
 
 interface Validation {
-  email?: string,
+  username?: string,
   password?: string,
-}
+};
 
 const validation = (values: Validation) => {
     let errors: Validation = {};
 
     const check = (key: any) => key in values;
 
-    if(check("email")){
-      if(!values.email) {
-        errors.email = "required";
-      }
-      else if(!/\S+@\S+\.\S+/.test(values.email)){
-        errors.email = "Invalid email address"
-      }
+    if (check("username")) {
+      if (!values.username) {
+        errors.username = "required";
+      } 
+      else if (values.username.length < 3) {
+        errors.username = "Must be at least 3 characters";
+      } 
     }
+
     return errors
-}
+};
 
 const Signin = () => {
     
@@ -35,43 +36,43 @@ const Signin = () => {
 
     const {errors} = useAppSelector(state => state.authentications);
 
-    const initalState = { email: "", password: ""};
+    const initalState = { username: "", password: ""};
 
     const {values, onChange, onSubmit, loading, validationErrors, edited} = useForm(initalState, callback, validation);
 
     async function callback(){
-      await dispatch(Authentication.login(values));
+      await dispatch(Authentication.signin(values));
     };
 
     return (
     <Fragment>
 
-        <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
+      
+        <Input 
+          label1="Username or Email" 
+          error={validationErrors.username} 
+          placeholder="..." 
+          name="username" 
+          value={values.username} 
+          onChange={onChange} 
+        />
+
+        <Input 
+          label1="Password" 
+          type="password"
+          error={validationErrors.password} 
+          placeholder="..." 
+          name="password" 
+          value={values.password} 
+          onChange={onChange} 
+        />
         
-          <Input 
-            label1="Email address" 
-            error={validationErrors.email} 
-            placeholder="..." 
-            name="email" 
-            value={values.email} 
-            onChange={onChange} 
-          />
+        {errors.login && <Container color="red"><Text color='red'>{errors.login}</Text></Container>}
+                  
+        {edited && <Button type="submit" loading={loading} color="primary">Confirm</Button>}
 
-          <Input 
-            label1="Password" 
-            type="password"
-            error={validationErrors.password} 
-            placeholder="..." 
-            name="password" 
-            value={values.password} 
-            onChange={onChange} 
-          />
-          
-          {errors.login && <Container color="red"><Text message={errors.login} color='red'/></Container>}
-                    
-          {edited && <Button type="submit" label1={"Confirm"} loading={loading} color="primary" />}
-
-        </Form>
+      </Form>
   
     </Fragment>
   )

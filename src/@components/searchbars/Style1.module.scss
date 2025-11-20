@@ -1,0 +1,13 @@
+.container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: var(--light);
+    button, input{
+        padding: 0.5rem;
+        display: block;
+    }
+    input{
+        width: 100%;
+    }   
+}

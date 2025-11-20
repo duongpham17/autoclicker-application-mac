@@ -10,44 +10,33 @@ export const generateid = (times: number = 2): string => {
 
 export const capitalise = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
-}
+};
 
 export const secondsToMinutes = (seconds: number): string => {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
   return `${minutes.toString().padStart(2, '0')}m ${remainingSeconds.toString().padStart(2, '0')}s`;
-}
+};
 
 export const copyToClipboard = (data: any) => {
   if(typeof data !== "string") return navigator.clipboard.writeText(JSON.stringify(data));
   return navigator.clipboard.writeText(data);
 };
 
-export const readFromClipboard = async () => {
+export const readFromClipboard = async (): Promise<any | null> => {
   try {
-    let data = await navigator.clipboard.readText();
-    if (data.includes("{") || data.includes("[")) {
-      try {
-        data = JSON.parse(data);
-      } catch {
-        // If JSON parsing fails, just return the raw string
-        return data;
-      }
+    const data = await navigator.clipboard.readText();
+    if (!data) return null;
+
+    try {
+      return JSON.parse(data); // Try parsing JSON
+    } catch {
+      return data; // Fallback: return raw string
     }
-    // Optional: Validate data if you expect an object with certain properties (e.g., x, y)
-    if (
-      typeof data === 'object' &&
-      data !== null &&
-      ('x' in data || 'y' in data)
-    ) {
-      // You can add more checks here if desired
-      return data;
-    }
-    return data; // Return raw string or parsed data
   } catch (error) {
-    // Clipboard access error or permission denied, safely return null or empty
     console.error("Clipboard access error:", error);
     return null;
   }
 };
+
 

@@ -8,6 +8,13 @@ interface Props {
 
 export const RobotjsEvents:Props[] = [
     {
+        id: 1000,
+        name: "",
+        robot: "",
+        description: "Select a mouse event",
+        events: ""
+    },
+    {
         id: 0,
         name: "Click mouse",
         robot: "mouseClick",
@@ -74,7 +81,7 @@ export const RobotjsEvents:Props[] = [
         id: 9,
         name: "Type string",
         robot: "typeString",
-        description: "auto type words for you",
+        description: "Auto type words for you",
         events: "typing",
     },
     {
@@ -147,7 +154,7 @@ export const RobotjsPixelEvents:Props[] = [
         id: 8,
         name: "Type string",
         robot: "typeString",
-        description: "auto type words for you",
+        description: "Auto type words for you",
         events: "typing",
     },
     {

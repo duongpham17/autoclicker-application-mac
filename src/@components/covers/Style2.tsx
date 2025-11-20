@@ -1,5 +1,3 @@
-"use client"
-
 import styles from './Style2.module.scss';
 import React, {useEffect} from 'react';
 
@@ -22,7 +20,7 @@ export const Style2 = ({children, onClose, open}: Types) => {
         {children}
 
         <div className={styles.bottomButton}>
-          <button onClick={onClose}> CLOSE </button>
+          <button onClick={onClose}> Close </button>
         </div>
       </div>
     </div>

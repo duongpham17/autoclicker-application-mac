@@ -1,6 +1,8 @@
 .container{
-    border-radius: 50px;
+    display: flex;
+    align-items: center;
     padding: 0.5rem;
+    border-radius: 0;
     &:hover{
         opacity: 0.8;
     }
@@ -15,7 +17,7 @@
     background-color: var(--primary) !important;
 }
 .default{
-    background-color: var(--background);
+    background-color: rgba(70, 70, 70, 0.5);
 }
 .white{
     background-color: white;
@@ -23,22 +25,18 @@
 .black{
     background-color: black;
 }
-.red{
-    background-color: var(--red);
-    *{color: white;}
-}
-.green{
-    background-color: var(--green);
-    *{color: white;}
-}
 .dark{
     background-color: var(--dark);
-    *{color: white;}
 }
 .light{
     background-color: var(--light);
 }
-.primary{
+.red{
+    background-color: var(--red);
+}
+.green{
+    background-color: var(--green);
+}
+.primary{   
     background-color: var(--primary);
-    *{ color: white;}
 }

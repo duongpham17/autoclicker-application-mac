@@ -25,6 +25,12 @@ export const users = (state = initialState, action: ACTIONS) => {
                 ...state,
                 errors: payload
             };
+        case TYPES.USERS_RESPONSE_CLEAR:
+            return {
+                ...state,
+                errors: {},
+                status: {}
+            }
         default: 
             return state;
     }

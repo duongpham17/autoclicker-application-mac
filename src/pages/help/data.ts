@@ -1,14 +1,67 @@
+export const videos = {
+  title: "Mouse Events Examples",
+  data: [
+    {
+      sub: "Mouse Click",
+      text: "Clicks the left, middle, or right mouse button.",
+      youtube: "",
+    }
+  ]
+}
+
+export const mouseData = {
+  title: "Mouse Data Usage",
+  data: [
+    {
+      sub: "F1",
+      text: "Will start retrieving the mouse location and its pixel color (monitor(s) might not respond). Tip: If you don't click outside the client, you can continuously press F1 without it failing."
+    },
+    {
+      sub: "F2",
+      text: `Will copy/save the latest known mouse data to clipboard.`
+    },
+    {
+      sub: "F3",
+      text: "Clear mouse data."
+    },
+    {
+      sub: "F4",
+      text: "Close and open mouse data terminal."
+    }
+  ]
+}
+
 export const scripts = {
   title: "Scripts",
   data: [
     {
       sub: "Credits",
-      text: "Each credit you purchase equals one script, and the script lasts indefinitely. You can edit it as many times as you like. If you delete the script, the credit will be refunded. This allows you to keep your UI clean and organized."
+      text: "Each credit you purchase gives you one script. That credit can also be used to upgrade the script's command limit, and the script lasts indefinitely. You can edit it as much as you want. If you delete the script, the credit is refunded, helping you keep your UI clean and organized."
+    },
+    {
+      sub: "Upgrade",
+      text: "Every script starts with a default limit of 50 commands. Each credit you spend increases that limit by another 50 commands. If you upgrade a script 3 times (plus the 1 credit used to create it) and then delete the script, you will be refunded all 4 credits."
+    },
+    {
+      sub: "Reducing Upgrade Level",
+      text: "The only way to reduce a script's upgrade level is to delete it and receive the credits back; if you already have commands you want to keep, simply create a new script and import them into it."
+    },
+    {
+      sub: "Private & Public",
+      text: "Makes your script searchable when public."
+    },
+    { 
+      sub: "Import & Export",
+      text: "You can import scripts from others, and the cost is 1 credit per 50 commands—if your script's upgrade level is higher you'll be refunded the difference, and if it's lower additional credits will be deducted."
+    },
+    {
+      sub: "Localised Scripts",
+      text: "If you go offline or lose Wi-Fi, you can still run scripts in a local environment. You can also log into a friend's account and save scripts to their local environment without them needing their own account."
     },
     {
       sub: "How to delete script?",
-      text: `Click on the title of your script -> delete -> after deleting you will be given back 1 credit.`
-    }
+      text: `Click on the title of your script -> delete -> after deleting you will be given back 1 credit + the amount of upgrade.`
+    },
   ]
 }
 
@@ -35,13 +88,7 @@ export const seconds = {
   data: [
     {
       sub: "Seconds",
-      text: `Intervals or ticks are 0.1 second, make sure the seconds you set are incremntally greater than the previous. 
-      Example if you set 1st command as 5s and 2nd command as 7 seconds, 1st will execute after 5s and 2nd will execute 2s after.
-      Always ensure the commands are going from lowest seconds to highest seconds.`
-    },
-    {
-      sub: "OverLapping Seconds",
-      text: "This will break your script and it might cause weird events to happen in weird orders. So do not have repeating seconds."
+      text: `Intervals or ticks are 0.1 second, E.g 10 ticks in 1 second.`
     },
     {
       sub: "0 Second Issues",
@@ -83,11 +130,11 @@ export const mouseEvents = {
     },
     {
       sub: "keyTap",
-      text: "Simulates tapping a single key on the keyboard."
+      text: "Simulates tapping a key on the keyboard. You can also use modifiers like Shift, Alt, or Control, and combine them—for example, Shift + Command."
     },
     {
       sub: "keyToggle",
-      text: 'Holds down a specific key ("down") or releases it ("up").'
+      text: 'Simulates pressing and releasing a specific key. Use "down" to hold the key and "up" to release it. Can be combined with modifiers like Shift, Control, or Command. It can also be combined E.g shift command.'
     },
     {
       sub: "typeString",
@@ -103,6 +150,10 @@ export const mouseEvents = {
 export const inputFields = {
   title: "Input Fields",
   data: [
+    {
+      sub: "Private",
+      text: "If you want the script to be shareable with others set it to public. Every new script is default private." 
+    },
     {
       sub: "Name",
       text: "Helps you identify what each mouse event does. If left empty, a unique ID will be generated automatically."
@@ -128,4 +179,4 @@ export const inputFields = {
       text: `This input is for "getPixelEvents". The script checks if the pixel color at the specified (x, y) coordinates matches the expected value. It will wait for the duration you set — for example, if the wait is set to 10 seconds, the script will wait up to 10 seconds for the pixel color to match. If the pixel color does not match within this timeframe, the mouse event will be skipped, and the script will continue with the next command.`
     }
   ]
-}
+};

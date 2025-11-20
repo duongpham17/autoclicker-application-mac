@@ -7,7 +7,7 @@ import {AiOutlineCopy, AiOutlineCheck} from 'react-icons/ai';
 import {BsMouse2} from 'react-icons/bs';
 import {BiTrash, BiPause, BiPlay} from 'react-icons/bi';
 import Hover from '@components/hover/Style1';
-import Flex from '@components/flex/Style1';
+import Flex from '@components/flex/Flex';
 
 const Mouse = () => {
 
@@ -63,40 +63,40 @@ const Mouse = () => {
     }, []);
 
     useEffect(() => {
-        const handleEvent = ({ code }: KeyboardEvent) => {
+        const handleKeyboard = ({ code }: KeyboardEvent) => {
             if (code !== 'F1') return;
             intervalId ? onStop() : onStart();
         };
-        window.addEventListener('keydown', handleEvent);
-        return () => window.removeEventListener('keydown', handleEvent);
+        window.addEventListener('keyup', handleKeyboard);
+        return () => window.removeEventListener('keyup', handleKeyboard);
     }, [intervalId, onStart, onStop]);
 
     useEffect(() => {
-        const handleEvent = ({ code }: KeyboardEvent) => {
+        const handleKeyboard = ({ code }: KeyboardEvent) => {
             if (code !== 'F2') return;
             if (print.length === 0) return;
             onCopy({x: print[0].x, y: print[0].y, color: print[0].color});
         };
-        window.addEventListener('keydown', handleEvent);
-        return () => window.removeEventListener('keydown', handleEvent);
+        window.addEventListener('keyup', handleKeyboard);
+        return () => window.removeEventListener('keyup', handleKeyboard);
     }, [onCopy, print]);
 
     useEffect(() => {
-        const handleEvent = ({ code }: KeyboardEvent) => {
+        const handleKeyboard = ({ code }: KeyboardEvent) => {
             if (code !== 'F3') return;
             onClear();
         };
-        window.addEventListener('keydown', handleEvent);
-        return () => window.removeEventListener('keydown', handleEvent);
+        window.addEventListener('keyup', handleKeyboard);
+        return () => window.removeEventListener('keyup', handleKeyboard);
     }, [intervalId, onClear]);
 
     useEffect(() => {
-        const handleEvent = ({ code }: KeyboardEvent) => {
+        const handleKeyboard = ({ code }: KeyboardEvent) => {
             if (code !== 'F4') return;
             onOpen();
         };
-        window.addEventListener('keydown', handleEvent);
-        return () => window.removeEventListener('keydown', handleEvent);
+        window.addEventListener('keyup', handleKeyboard);
+        return () => window.removeEventListener('keyup', handleKeyboard);
     }, [intervalId, onOpen]);
 
     if (!user || !isDashboard) return <div></div>;
@@ -128,13 +128,13 @@ const Mouse = () => {
 
         <div className={styles.terminal}>
             {print.map((log, index) => (
-                <button key={index} style={{ borderColor: `#${log.color}` }} onClick={() => onCopy(log)}>
-                <Hover message="Copy ( F2 )"><p>{`{ x: ${log.x}, y: ${log.y} }`}</p></Hover>
-                <p>
-                    #{log.color}
-                    <span className={styles.color} style={{ backgroundColor: `#${log.color}` }} />
-                    <span className={styles.copy}> {copy ? <AiOutlineCheck /> : <AiOutlineCopy />}</span>
-                </p>
+                <button key={index} style={{ borderColor: `#${log.color}` }} onClick={() => onCopy(log)} onPointerEnter={() => onStop()}>
+                    <Hover message="Copy ( F2 )"><p>{`{ x: ${log.x}, y: ${log.y} }`}</p></Hover>
+                    <p>
+                        #{log.color}
+                        <span className={styles.color} style={{ backgroundColor: `#${log.color}` }} />
+                        <span className={styles.copy}> {copy ? <AiOutlineCheck /> : <AiOutlineCopy />}</span>
+                    </p>
                 </button>
             ))}
         </div>

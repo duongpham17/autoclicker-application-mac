@@ -1,5 +1,6 @@
 .container{
     width: 100%;
+    margin: 0.5rem 0;
     p{
         width: 100%;
         color: var(--text-light)
@@ -8,7 +9,6 @@
         padding: 0.5rem;
         box-sizing: border-box;
         background-color: var(--light);
-        margin-bottom: 0.5rem;
         width: 100%;
         transition: 0.2s ease-in-out;
         border: 1px solid var(--light);

@@ -1,12 +1,16 @@
 export interface IUsersApi {
     _id: string,
+    username: string,
     email: string,
-    role: "user" | "admin",
     credit: number,
-    password: string,
-    reset_password_expiration: number,
-    reset_link_hash: string,
+    role: "user" | "admin",
+    code: string,
     createdAt: number,
+};
+
+export interface IUsersVerifyEmail {
+    email: string,
+    token: string
 };
 
 export interface ResponseType {
@@ -16,10 +20,12 @@ export interface ResponseType {
 /*STATE**************************************************************************************************************/
 
 export interface INITIALSTATE {
-    user: IUsersApi[] | null,
+    user: IUsersApi | null,
     status: ResponseType,
     errors: ResponseType,
 };
+
+export type TUsersObjectKeys = keyof INITIALSTATE
 
 /*ACTION**************************************************************************************************************/
 
@@ -27,6 +33,7 @@ export enum TYPES {
     USERS_UPDATE = "USERS_UPDATE",
     USERS_RESPONSE_STATUS = "USERS_RESPONSE_STATUS",
     USERS_RESPONSE_ERROR  = "USERS_RESPONSE_ERROR",
+    USERS_RESPONSE_CLEAR  = "USERS_RESPONSE_CLEAR"
 };
 
 interface Update {
@@ -44,4 +51,9 @@ interface Response_Error {
     payload: ResponseType;
 };
 
-export type ACTIONS = Update | Response_Status | Response_Error;
+interface Response_Clear {
+    type: TYPES.USERS_RESPONSE_CLEAR,
+    payload: null;
+};
+
+export type ACTIONS = Update | Response_Status | Response_Error | Response_Clear;

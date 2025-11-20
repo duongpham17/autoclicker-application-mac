@@ -25,7 +25,7 @@ const Style1 = ({label1, label2, options, value, onClick}:Props) => {
           </div>
 
           <select key={label1} onChange={handleChange} value={value}>
-            {options.map(el => <option key={el} value={el}>{el}</option>)}
+            {options.map((el, index) => <option key={el+index} value={el}>{el}</option>)}
           </select>
 
       </div>

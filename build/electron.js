@@ -1,5 +1,5 @@
-// const development = require('./electron-development');
-// development.start();
+const development = require('./electron-development');
+development.start();
 
-const production = require('./electron-production');
-production.start();
+// const production = require('./electron-production');
+// production.start();

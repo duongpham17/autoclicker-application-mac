@@ -1,6 +1,7 @@
 .container{
     width: 100%;
-
+    margin: 0.5rem 0;
+    
     .labels{
         display: flex;
         align-items: center;
@@ -8,29 +9,27 @@
         p{
             color: var(--text-light);
         }
+        svg{
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
     }
 
     select {
+        height: 35px;
         padding: 0.5rem;
         width: 100%;
         transition: 0.2s ease-in-out;
-        box-sizing: border-box;
-        border: 1px solid var(--light);
-        background-color: var(--light);;
+        border: 1px solid transparent;
+        background-color: var(--light);
         outline: none;
-        margin-bottom: 0.5rem;
         cursor: pointer;
-        
+        box-sizing: border-box;
+
         &:hover{
             border: 1px solid var(--primary);
         }
     }
 
-    option{
-        display: block;
-        align-items: center;
-        span{
-            font-size: 0.9rem;
-        }
-    }
 }

@@ -4,9 +4,10 @@ import {Routes, Route} from 'react-router-dom';
 import Private from './Private';
 import Login from './login';
 import Home from './home';
-import Dashboard from './dashkboard';
+import Scripts from './scripts';
 import Help from './help';
 import Profile from './profile';
+import Localised from './localised';
 
 const Pages = () => {
   return (
@@ -15,7 +16,8 @@ const Pages = () => {
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/help" element={<Help/>} />
-        <Route path="/dashboard" element={<Private component={Dashboard} roles={["admin","user"]}/> } />
+        <Route path="/localised" element={<Localised/>} />
+        <Route path="/scripts" element={<Private component={Scripts} roles={["admin","user"]}/> } />
         <Route path="/Profile" element={<Private component={Profile} roles={["admin","user"]}/> } />
       </Routes>
     </div>

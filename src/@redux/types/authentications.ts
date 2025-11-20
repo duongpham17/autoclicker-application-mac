@@ -6,12 +6,12 @@ export interface ResponseType {
 };
 
 export interface IAuthenticationsSignup {
-    email: string,
+    username: string,
     password: string,
 };
 
-export interface IAuthenticationsLogin {
-    email: string,
+export interface IAuthenticationsSignin {
+    username: string,
     password: string,
 };
 
@@ -31,11 +31,12 @@ export interface INITIALSTATE {
     errors: ResponseType,
 };
 
-export type AuthenticationsObjectKeys = keyof INITIALSTATE
+export type TAuthenticationsObjectKeys = keyof INITIALSTATE
 
 /*ACTION**************************************************************************************************************/
 
 export enum TYPES {
+    AUTHENTICATIONS_UPDATE           = "AUTHENTICATIONS_UPDATE",
     AUTHENTICATIONS_SIGNIN           = "AUTHENTICATIONS_SIGNIN",
     AUTHENTICATIONS_SIGNUP           = "AUTHENTICATIONS_SIGNUP",
     AUTHENTICATIONS_CODE             = "AUTHENTICATIONS_CODE",
@@ -45,6 +46,11 @@ export enum TYPES {
     AUTHENTICATIONS_RESPONSE_ERROR   = "AUTHENTICATIONS_RESPONSE_ERROR",
     AUTHENTICATIONS_RESPONSE_STATUS  = "AUTHENTICATIONS_RESPONSE_STATUS",
     AUTHENTICATIONS_RESPONSE_CLEAR   = "AUTHENTICATIONS_RESPONSE_CLEAR",
+};
+
+interface Update {
+    type: TYPES.AUTHENTICATIONS_UPDATE,
+    payload: IUsersApi
 };
 
 interface Signin {
@@ -84,7 +90,7 @@ interface Response_Error {
 
 interface Response_Clear {
     type: TYPES.AUTHENTICATIONS_RESPONSE_CLEAR,
-    payload: ResponseType;
+    payload: null
 };
 
-export type ACTIONS = Signin | Signup | Forgot | Reset | Load | Response_Status | Response_Error | Response_Clear
+export type ACTIONS = Update | Signin | Signup | Forgot | Reset | Load | Response_Status | Response_Error | Response_Clear

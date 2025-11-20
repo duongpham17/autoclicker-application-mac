@@ -16,12 +16,22 @@
 .container{
 
     .warning{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
         button{
             margin: 0.5rem 0;
+            width: 100%;
+            padding: 0.5rem;
+            &:hover{
+                opacity: 0.8;
+            }
         }
         .sure{
             background-color: var(--red);
             color: white;
+            width: 50%;
         }
         .exit{
             background-color: var(--light);
@@ -29,12 +39,14 @@
         }
     }
     
-    button{
+    .button{
+        display: flex;
+        align-items: center;
         border: 1px solid transparent;
         padding: 0.5rem;
         width: 100%;
-        transition: 0.2s ease-in-out;
-
+        transition: 0.3s ease-in-out;
+        
         &:hover{
             opacity: 0.8;
         }
@@ -42,38 +54,21 @@
         svg{
             display: block;
             align-items: center;
-            font-size: 1rem;
         }   
         
-        .single{
-            margin: auto;
-        }
-
-        .double{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;    
-        }
-
-        .loading1{
+        .loading{
             @include Loading(15px, 15px, 2px, white);
             margin: auto;
         }
-
-        .loading2{
-            @include Loading(15px, 15px, 2px, white);
-        }
-
     }
-    .selected{
-        background-color: var(--primary) !important;
+    .between{
+        justify-content: space-between;
+    }
+    .center{
+        justify-content: center;
     }
     .margin{
-        margin-bottom: 0.5rem;
-    }
-    .default{
-        background-color: var(--background);
+        margin: 0.5rem;
     }
     .white{
         background-color: white;
@@ -101,6 +96,10 @@
     }
     .primary{
         background-color: var(--primary);
-        *{ color: white;}
+    }
+    .selected{
+        background-color: var(--dark);
+        border: 1px solid var(--primary);
+        *{color: var(--primary)};
     }
 }

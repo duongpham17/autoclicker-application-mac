@@ -6,6 +6,8 @@ export interface IScriptsApi {
     max_loop: number,
     commands: IScriptsCommands[],
     description: string,
+    private: boolean,
+    upgrade: number,
     usedAt: number,
     createdAt: number,
 };
@@ -21,6 +23,7 @@ export interface IScriptsCommands {
     event?: string,
     click?: string,
     toggle?: string,
+    modifiers?:string,
     xyrange?: number,
     x?: number,
     y?: number,
@@ -31,6 +34,12 @@ export interface IScriptsCommands {
     pixel_wait?: number
 };
 
+export interface IScriptsUpgrade {
+    _id: string,
+    inc: -1 | 1,
+    upgrade: number
+}
+
 export interface ResponseType {
     [key: string]: any
 };
@@ -39,6 +48,7 @@ export interface ResponseType {
 
 export interface INITIALSTATE {
     scripts: IScriptsApi[] | null,
+    search: IScriptsApi[] | null,
     errors: ResponseType
 };
 
@@ -49,7 +59,9 @@ export enum TYPES {
     SCRIPTS_UPDATE = "SCRIPTS_UPDATE",
     SCRIPTS_CREATE = "SCRIPTS_CREATE",
     SCRIPTS_REMOVE = "SCRIPTS_REMOVE",
-    SCRIPTS_ERRORS  = "SCRIPTS_ERROR",
+    SCRIPTS_UPGRADE= "SCRIPTS_UPGRADE",
+    SCRIPTS_SEARCH = "SCRIPTS_SEARCH",
+    SCRIPTS_ERRORS = "SCRIPTS_ERROR",
 };
 
 interface Find {
@@ -67,6 +79,16 @@ interface Create {
     payload: IScriptsApi
 };
 
+interface Upgrade {
+    type: TYPES.SCRIPTS_UPGRADE,
+    payload: IScriptsApi
+};
+
+interface Search {
+    type: TYPES.SCRIPTS_SEARCH,
+    payload: IScriptsApi[]
+};
+
 interface Remove {
     type: TYPES.SCRIPTS_REMOVE,
     payload: string
@@ -77,4 +99,4 @@ interface Errors {
     payload: ResponseType
 };
 
-export type ACTIONS = Find | Update | Create | Remove | Errors;
+export type ACTIONS = Find | Update | Create | Upgrade | Search | Remove | Errors;

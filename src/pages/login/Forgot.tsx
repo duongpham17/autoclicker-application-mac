@@ -57,14 +57,9 @@ const Forgot = () => {
           onChange={onChange} 
         />
 
-        {errors.forgot && <Container color="red"><Text message={errors.forgot} color='red'/></Container>}
+        {errors.forgot && <Container color="red"><Text color='red'>{errors.forgot}</Text></Container>}
 
-        <Button 
-          type="submit" 
-          label1={"Forgot Password"}
-          loading={loading} 
-          color="primary" 
-        />
+        <Button type="submit" loading={loading} color="primary">Forgot Password</Button>
 
       </Form>
     </Fragment>

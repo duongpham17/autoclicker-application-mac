@@ -10,7 +10,7 @@ function start(){
     await waitOn({ resources: ['http://localhost:3000'] });
 
     const win = new BrowserWindow({
-      width: 700,
+      width: 700, 
       height: 700,
       minWidth: 500,
       minHeight: 500,

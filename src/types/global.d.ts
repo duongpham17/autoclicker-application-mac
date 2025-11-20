@@ -12,7 +12,7 @@ declare global {
       getMousePos: () => { x: number; y: number };
       getPixelColor: (x: number, y: number) => string,
       keyTap: (key: string) => void,
-      keyToggle: (toggle: string, key: string) =>  void,
+      keyToggle: (toggle: string, key: string, mod: string[]) =>  void,
       typeString: (string: string) => void,
     }
   }

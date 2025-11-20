@@ -1,0 +1,16 @@
+.container{
+    .results{
+        .element{
+            margin: 0.5rem auto;
+            background-color: var(--dark-shade);
+            padding: 0.5rem;
+
+            .description{
+                p{
+                    white-space: pre-wrap;
+                }
+            }
+        }
+    }
+
+}

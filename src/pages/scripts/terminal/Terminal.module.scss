@@ -1,0 +1,31 @@
+.container{
+    padding: 0.5rem 1rem;
+    .header{
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        padding: 0.5rem 0;
+    }
+
+    .logs{
+        height: 100%;
+        padding-bottom: 5rem;
+        padding-top: 0.5rem;
+        .element{
+            padding: 0.5rem;
+            border-left: 1px solid;
+            border-right: 1px solid;
+        }
+    }
+
+    .exitBtn{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        width: 100%;
+        button{
+            border: 1px solid var(--light);
+        }
+    }
+}

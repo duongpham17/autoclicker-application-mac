@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { ACTIONS, TYPES, IUsersApi } from '@redux/types/users';
+import { ACTIONS, TYPES, IUsersApi, IUsersVerifyEmail } from '@redux/types/users';
 import { api } from '@redux/api';
 
 const endpoint = "/users"
@@ -12,11 +12,11 @@ const update = (data: IUsersApi) => async (dispatch: Dispatch<ACTIONS>) => {
             payload: res.data.data as IUsersApi
         });
     } catch(error:any){
-        console.log(error.response);
         dispatch({
             type: TYPES.USERS_RESPONSE_ERROR,
             payload: {update: error.response.data.message}
         });
+        console.log(error.response);
     }
 };
 
@@ -38,25 +38,75 @@ const password = (password: string) => async (dispatch: Dispatch<ACTIONS>) => {
             payload: {}
         });
     } catch(error:any){
-        console.log(error.response.data);
         dispatch({
             type: TYPES.USERS_RESPONSE_ERROR,
-            payload: {update: error.response.data.message}
+            payload: {password: error.response.data.message}
         });
+        console.log(error.response.data);
     }
 };
 
-const state_errors = (key:string, value: string) => async (dispatch: Dispatch<ACTIONS>) => {
+const verifyToken = (email: string) => async (dispatch: Dispatch<ACTIONS>) => {
+    try{
+        await api.patch(`${endpoint}/verify/token`, {email});
+        dispatch({
+            type: TYPES.USERS_RESPONSE_STATUS,
+            payload: { verify_email_token: "success", email}
+        });
+        dispatch({
+            type: TYPES.USERS_RESPONSE_ERROR,
+            payload: {}
+        });
+    } catch(error:any){
+        dispatch({
+            type: TYPES.USERS_RESPONSE_ERROR,
+            payload: {verify_email_token: error.response.data.message}
+        });
+        console.log(error.response.data);
+    }
+};
+
+const verifyEmail = (data: IUsersVerifyEmail) => async (dispatch: Dispatch<ACTIONS>) => {
+    try{
+        const res = await api.patch(`${endpoint}/verify/email`, data);
+        dispatch({
+            type: TYPES.USERS_UPDATE,
+            payload: res.data.data
+        });
+        dispatch({
+            type: TYPES.USERS_RESPONSE_STATUS,
+            payload: {verify_email: "success"}
+        });
+    } catch(error:any){
+        dispatch({
+            type: TYPES.USERS_RESPONSE_ERROR,
+            payload: {verify_email: error.response.data.message}
+        });
+        console.log(error.response.data);
+    }
+};
+
+const stateErrors = (key:string, value: string) => async (dispatch: Dispatch<ACTIONS>) => {
     dispatch({
         type: TYPES.USERS_RESPONSE_ERROR,
         payload: {[key]: value}
     });
 };
 
+const stateClear = () => (dispatch: Dispatch<ACTIONS>) => {
+    dispatch({
+        type: TYPES.USERS_RESPONSE_CLEAR,
+        payload: null
+    });
+};
+
 const Users = {
     update,
     password,
-    state_errors
+    verifyToken,
+    verifyEmail,
+    stateErrors,
+    stateClear
 };
 
 export default Users;

@@ -4,7 +4,6 @@
     justify-content: space-between;
     padding: 0.5rem;
     width: 100%;
-    text-align: left;
     &:hover{
         svg {
             color: var(--primary);
@@ -14,7 +13,7 @@
         transition: ease-in-out 0.3s;
         font-size: 1.5rem;
     }
-    .iconOpen{
+    .open{
         transform: rotate(720deg);
         transition: transform 2s ease; /* smooth rotation */
         color: var(--primary);
