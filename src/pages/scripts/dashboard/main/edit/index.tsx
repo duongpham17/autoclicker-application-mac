@@ -15,7 +15,7 @@ const EditCommand = ({script, edit}: {script: IScriptsApi, edit: IScriptsCommand
 
     const {onChange, onSubmit, onSetValue, values, onClear, edited} = useForm(edit, callback, validation);
 
-    async function callback(){
+    function callback(){
         const data = {...script};
         values.seconds = Number(values.seconds);
         values.delay_at_loop = Number(values.delay_at_loop);
@@ -27,15 +27,15 @@ const EditCommand = ({script, edit}: {script: IScriptsApi, edit: IScriptsCommand
         if(!values.pixel_event) delete values.pixel_event;
         if(!values.pixel_color) delete values.pixel_color;
         data.commands = data.commands.map(el => el._id === values._id ? values : el);
-        await onUpdateScript(data);
+        onUpdateScript(data);
         setEdit(null);
         onClear();
     };
 
-    const onDelete = async () => {
+    const onDelete = () => {
         const data = {...script};
         data.commands = data.commands.filter(el => el._id !== values._id);
-        await onUpdateScript(data);
+        onUpdateScript(data);
         setEdit(null);
     };
 

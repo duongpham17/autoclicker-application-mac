@@ -25,10 +25,10 @@ const Mouse = () => {
 
     const [warning, setWarning] = useState("");
 
-    const isDashboard = location.pathname.includes("dashboard");
+    const isDashboard = location.pathname.includes("scripts");
 
     const onStart = useCallback(() => {
-        const robot = window.robot
+        const robot = window.robot;
         setOpen(true);
         let interval = setInterval(() => {
            const {x, y} = robot.getMousePos();

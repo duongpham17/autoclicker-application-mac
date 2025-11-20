@@ -26,30 +26,26 @@ const Informations = ({script}: {script: IScriptsApi}) => {
 
   const {user} = useAppSelector(state => state.authentications);
   const {cost, onUpdateScript, onDeleteScript, onLocaliseScript, localised, onUpgradeScript, onSaveScript} = useContext(Context);
-  const {onOpen, open} = useOpen({});
-  const {setOpen: setPrivate, open: openPrivate} = useOpen({});
-  const {setOpen: setOpenExport, open: openExport} = useOpen({});
-  const {setOpen: setOpenLocalise, open: openLocalise} = useOpen({});
-  const {setValues: setValuesImport, values: valuesImport} = useOpen({});
+  const {array: loaders, onOpenArray: setLoaders} = useOpen({})
   const {values, setValues, onChange, onSubmit, validationErrors, loading, edited, onSetValue} = useForm(script, callback, validation);
 
   async function callback(){
+    setLoaders("edit");
     values.max_loop = Math.round(values.max_loop);
     onUpdateScript(values);
-    onOpen();
   };
 
   const onPrivate = () => {
-    setPrivate(true);
+    setLoaders("private");
     onUpdateScript({ ...values, private: !values.private });
-    const timer = setTimeout(() => setPrivate(false), 3000);
+    const timer = setTimeout(() => setLoaders("private"), 3000);
     return () => clearTimeout(timer);
   };
 
   const onExport = () => {
-    setOpenExport(true);
+    setLoaders("export");
     copyToClipboard(script);
-    const timer = setTimeout(() => setOpenExport(false), 3000);
+    const timer = setTimeout(() => setLoaders("export"), 3000);
     return () => clearTimeout(timer);
   };
   
@@ -59,13 +55,13 @@ const Informations = ({script}: {script: IScriptsApi}) => {
       const clipboardData = await readFromClipboard();
       // --- Validate Clipboard Data ---
       if ( !clipboardData || typeof clipboardData !== "object" || clipboardData === null || !Array.isArray(clipboardData.commands)) {
-        setValuesImport("Invalid");
-        return setTimeout(() => setValuesImport(""), 3000);
+        setLoaders("Invalid");
+        return setTimeout(() => setLoaders(""), 3000);
       };
       // Cannot import the same script
       if (clipboardData._id === script._id) {
-        setValuesImport("Same");
-        return setTimeout(() => setValuesImport(""), 3000);
+        setLoaders("Same");
+        return setTimeout(() => setLoaders(""), 3000);
       };
 
       const script_import: IScriptsApi = clipboardData;
@@ -73,8 +69,8 @@ const Informations = ({script}: {script: IScriptsApi}) => {
       const credit_available = Number(user.credit);
       const credit_cost = script_import.commands.length < cost ? 1 : Math.ceil(script_import.commands.length / cost);
       if (credit_available < credit_cost) {
-        setValuesImport("No Credits")
-        return setTimeout(() => setValuesImport(""), 3000);
+        setLoaders("No Credits")
+        return setTimeout(() => setLoaders(""), 3000);
       }
       // --- Refund based on previous upgrade ---
       const previousUpgrade = script.upgrade ?? 0;
@@ -89,18 +85,18 @@ const Informations = ({script}: {script: IScriptsApi}) => {
       }
       // --- Save imported script ---
       await onSaveScript({...script_import, _id: script._id, name: `I.${script.name}`, upgrade: credit_cost});
-      setValuesImport("success");
-      return setTimeout(() => setValuesImport(""), 3000);
+      setLoaders("success");
+      return setTimeout(() => setLoaders(""), 3000);
     } catch (err) {
-      setValuesImport("Invalid");
-      return setTimeout(() => setValuesImport(""), 3000);
+      setLoaders("Invalid");
+      return setTimeout(() => setLoaders(""), 3000);
     }
   };
 
   const onLocalise = () => {
-    setOpenLocalise(true);
+    setLoaders("localised");
     onLocaliseScript(script);
-    const timer = setTimeout(() => setOpenLocalise(false), 3000);
+    const timer = setTimeout(() => setLoaders("localised"), 3000);
     return () => clearTimeout(timer);
   };
 
@@ -122,33 +118,33 @@ const Informations = ({script}: {script: IScriptsApi}) => {
 
       <Container color="dark">
         <Between>
-          <button onClick={onOpen}>
+          <button onClick={() => setLoaders("edit")}>
             <Flex>
               <Hover message="Script Name"><Text size={20}>{values.name || "NEW SCRIPT"}</Text></Hover>
               <Hover message="Max Loops"><Text size={20}>{`(${values.max_loop})`}</Text></Hover>
             </Flex>
           </button>
           <Flex>
-            {(valuesImport === "Invalid" || valuesImport === "Same" || valuesImport === "No Credits") 
+            {(loaders.includes("Invalid") || loaders.includes("Same") || loaders.includes("No Credits")) 
               ?
-              <Hover message={`Import (${valuesImport})`}>
+              <Hover message={`Import (${loaders.includes("Same")?"Same":"Invalid"})`}>
                 <Icon color={"red"} onClick={onImport}><MdClear/></Icon>
               </Hover>
               :
-              <Hover message={`Import ${valuesImport}`}>
-                <Icon color={valuesImport==="success"?"primary":"dark"} onClick={onImport}>{valuesImport==="Success" ? <MdOutlineDone/> : <AiOutlineImport/>}</Icon>
+              <Hover message={`Import ${loaders.includes("Success")?"Success":""}`}>
+                <Icon color={loaders.includes("Success")?"primary":"dark"} onClick={onImport}>{loaders.includes("Success") ? <MdOutlineDone/> : <AiOutlineImport/>}</Icon>
               </Hover>
             }
-            <Hover message={openExport?"Export (Ready)":"Export"}>
+            <Hover message={loaders.includes("export")?"Export (Ready)":"Export"}>
               <Icon 
-                color={openExport?"primary":"dark"} 
+                color={loaders.includes("export")?"primary":"dark"} 
                 onClick={onExport}>
-                {openExport ? <MdOutlineDone/> : <AiOutlineExport/>}
+                {loaders.includes("export") ? <MdOutlineDone/> : <AiOutlineExport/>}
               </Icon>
             </Hover>
             <Hover message={localised?.some(el => el._id === script._id) ? `${onLocalisedOutdated()?"Outdated" : "Saved Locally"}` : "Not Localised" }>
               <Icon 
-                color={openLocalise?"primary":"dark"} 
+                color={loaders.includes("localised")?"primary":"dark"} 
                 onClick={onLocalise}>
                 {localised?.some(el => el._id === script._id) ? <AiFillSave/> : <MdOutlineCloudDownload /> }
               </Icon>
@@ -156,7 +152,7 @@ const Informations = ({script}: {script: IScriptsApi}) => {
             <Hover message={values.private ? "Private" : "Public"}>
               <Icon 
                 onClick={onPrivate} 
-                color={openPrivate?"primary":"dark"}>
+                color={loaders.includes("private")?"primary":"dark"}>
                 {values.private ? <BsLockFill/> : <BsUnlockFill/>}
               </Icon>
             </Hover>
@@ -171,8 +167,8 @@ const Informations = ({script}: {script: IScriptsApi}) => {
         </Between>
       </Container>
 
-      {open && 
-        <Cover open={open} onClose={onOpen}>
+      {loaders.includes("edit") && 
+        <Cover open={loaders.includes("edit")} onClose={() => setLoaders("edit")}>
           
             <Form onSubmit={onSubmit}>
               <Container>

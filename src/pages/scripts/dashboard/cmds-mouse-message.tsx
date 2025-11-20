@@ -46,6 +46,16 @@ const MoveMouseAndClick = ({cmd}: {cmd: IScriptsCommands}) => {
     )
 };
 
+const MoveMouseSmoothAndClick = ({cmd}: {cmd: IScriptsCommands}) => {
+    return (
+        <Fragment>
+            <Hover message={"Range"}><Flex><Text size={font_size}>{cmd.xyrange || 0}</Text><small>&#916;</small></Flex></Hover> <MdKeyboardArrowRight/>
+            <Hover message={"X,Y"}><Text size={font_size}>{`( ${cmd.x || "?"} , ${cmd.y || "?"} )`}</Text></Hover> <MdKeyboardArrowRight/>
+            <Hover message={"Click"}><Text size={font_size}>{cmd.click}</Text></Hover>
+        </Fragment>
+    )
+};
+
 const MoveMouse = ({cmd}: {cmd: IScriptsCommands}) => {
     return (
         <Fragment>
@@ -59,7 +69,7 @@ const MoveMouseSmooth = ({cmd}: {cmd: IScriptsCommands}) => {
     return (
         <Fragment>
             <Hover message={"Range"}><Flex><Text size={font_size}>{cmd.xyrange || 0}</Text><small>&#916;</small></Flex></Hover> <MdKeyboardArrowRight/>
-            <Hover message={"X,Y"}><Text size={font_size}>{`( ${cmd.x || "?"} , ${cmd.y || "?"} )`}</Text></Hover> <MdKeyboardArrowRight/>
+            <Hover message={"X,Y"}><Text size={font_size}>{`( ${cmd.x || "?"} , ${cmd.y || "?"} )`}</Text></Hover>
         </Fragment>
     )
 };
@@ -123,6 +133,7 @@ export const mouseMessage = {
     mouseClick: MouseClick,
     mouseToggle: MouseToggle,
     moveMouseAndClick: MoveMouseAndClick,
+    moveMouseSmoothAndClick: MoveMouseSmoothAndClick,
     moveMouse: MoveMouse,
     moveMouseSmooth: MoveMouseSmooth,
     dragMouse: DragMouse,

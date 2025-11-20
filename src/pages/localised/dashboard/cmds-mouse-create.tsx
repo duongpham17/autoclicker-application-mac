@@ -149,6 +149,57 @@ export const MoveMouseAndClick = ({values, onChange, onSetValue}: Props) => {
     );
 };
 
+export const MoveMouseSmoothAndClick = ({values, onChange, onSetValue}: Props) => {
+
+    const onPaste = async () => {
+        const value:any = await readFromClipboard();
+        if(value.x || value.y) onSetValue({x: value.x, y: value.y});
+    };
+
+    return (
+        <Fragment>
+            <Flex>
+                <Input  
+                    label1="Range"
+                    type="number"
+                    name="xyrange"
+                    placeholder="E.g 10"
+                    value={values.xyrange || ""}
+                    onChange={onChange}
+                    min={0}
+                    step="1"
+                />
+                <Input  
+                    label1="X"
+                    label2={<button type="button" onClick={onPaste}><MdContentPaste size={14}/></button>} 
+                    type="number"
+                    name="x"
+                    value={values.x || ""}
+                    onChange={onChange}
+                    min={0}
+                    step="0.1"
+                />
+                <Input  
+                    label1="Y"
+                    label2={<button type="button" onClick={onPaste}><MdContentPaste size={14}/></button>} 
+                    type="number"
+                    name="y"
+                    value={values.y || ""}
+                    onChange={onChange}
+                    min={0}
+                    step="0.1"
+                />
+                <Options1
+                    label1="Click" 
+                    options={["left", "middle", "right"]} 
+                    onClick={(side: string) => 
+                    onSetValue({click: side})}
+                />
+            </Flex>
+        </Fragment>
+    );
+};
+
 export const MoveMouse = ({values, onChange, onSetValue}: Props) => {
         
     const onPaste = async () => {
@@ -409,6 +460,7 @@ export const mouseEvents = {
     mouseClick: MouseClick,
     mouseToggle: MouseToggle,
     moveMouseAndClick: MoveMouseAndClick,
+    moveMouseSmoothAndClick: MoveMouseSmoothAndClick,
     moveMouse: MoveMouse,
     moveMouseSmooth: MoveMouseSmooth,
     dragMouse : DragMouse,

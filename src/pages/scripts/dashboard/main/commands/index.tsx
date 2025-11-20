@@ -76,7 +76,7 @@ const Commands = ({script}: {script: IScriptsApi}) => {
     const onSaveScriptToDatabae = () => {
         onSaveScript();
         setResetData(null)
-    }
+    };
 
     useEffect(() => {
         const handleKeyboard = ({ code, key }: KeyboardEvent) => {

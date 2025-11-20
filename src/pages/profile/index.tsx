@@ -5,6 +5,7 @@ import Logout from './logout';
 import Email from './email';
 import Password from './password';
 import Username from './username';
+import Orders from './orders'
 
 const ProfilePage = () => {
 
@@ -14,6 +15,10 @@ const ProfilePage = () => {
 
     return (
         <div className={styles.container}>
+
+            <Container style={style} color={color}>
+                <Orders />
+            </Container>
 
             <Container style={style} color={color}>
                 <Username />

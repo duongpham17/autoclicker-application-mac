@@ -20,13 +20,9 @@ const useOpen = <T>({initialState}: Props<T>) => {
     };
 
     const onOpenArray = (value: string) => {
-        const isOpen = array.includes(value);
-        if(isOpen) {
-            const newOpen = array.filter(el => el !== value);
-            setArray(newOpen);
-        } else {
-            setArray((state) => [...state, value])
-        }
+        setArray(state => state.includes(value) 
+            ? state.filter(el => el !== value) 
+            : [...state, value]);
     };
 
     const onArrayClear = () => {

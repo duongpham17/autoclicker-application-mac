@@ -1,12 +1,12 @@
 import UseContextMain from './Context';
 
-import Scripts from './scripts';
+import Dashboard from './dashboard';
 import Terminal from './terminal';
 
 const DashboardPage = () => {
   return (
     <UseContextMain>
-      <Scripts />
+      <Dashboard />
       <Terminal />
     </UseContextMain>
   )

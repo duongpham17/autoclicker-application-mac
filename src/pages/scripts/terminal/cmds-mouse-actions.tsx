@@ -46,18 +46,17 @@ export const robotData: Record<
     handler: (cmd) => robot.mouseToggle(cmd.toggle as string, cmd.click as string)
   },
   moveMouse: {
-    handler: (cmd) =>  {
-      robot.moveMouse(
-        random_range(cmd.x as number, cmd.xyrange||0), 
-        random_range(cmd.y as number, cmd.xyrange||0)
-      )      
-    }
+    handler: (cmd) =>  robot.moveMouse(
+      random_range(cmd.x as number, cmd.xyrange||0), 
+      random_range(cmd.y as number, cmd.xyrange||0)
+    )      
   },
   moveMouseSmooth: {
     handler: (cmd) => robot.moveMouseSmooth(
       random_range(cmd.x as number, cmd.xyrange||0), 
       random_range(cmd.y as number, cmd.xyrange||0)
     )
+  
   },
   dragMouse: {
     handler: (cmd) => robot.dragMouse(
@@ -71,7 +70,11 @@ export const robotData: Record<
   keyTap: {
     handler: (cmd): boolean => {
       try{
-        robot.keyTap(cmd.keyboard?.toLowerCase(), normalizeModifiers(cmd.modifiers));
+        if(cmd.modifiers){
+          robot.keyTap(cmd.keyboard?.toLowerCase(), normalizeModifiers(cmd.modifiers));
+        } else {
+          robot.keyTap(cmd.keyboard?.toLowerCase());
+        }
         return true;
       } catch(err){
         return false;
@@ -81,11 +84,24 @@ export const robotData: Record<
   keyToggle: {
     handler: (cmd): boolean => {
       try{
-        robot.keyToggle(cmd.keyboard?.toLowerCase(), cmd.toggle, normalizeModifiers(cmd.modifiers))
+        if(cmd.modifiers){
+          robot.keyToggle(cmd.keyboard?.toLowerCase(), cmd.toggle, normalizeModifiers(cmd.modifiers));
+        } else {
+          robot.keyToggle(cmd.keyboard?.toLowerCase(), cmd.toggle);
+        }
         return true;
       } catch(err){
         return false
       }
+    }
+  },
+  moveMouseSmoothAndClick: {
+    handler: (cmd) => {
+      robot.moveMouseSmooth(
+        random_range(cmd.x as number, cmd.xyrange||0), 
+        random_range(cmd.y as number, cmd.xyrange||0)
+      );
+      setTimeout(() => robot.mouseClick(cmd.click as string), 100);
     }
   },
   moveMouseAndClick: {

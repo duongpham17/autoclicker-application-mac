@@ -1,11 +1,41 @@
 export const videos = {
-  title: "Mouse Events Examples",
+  title: "Mouse Event Videos",
   data: [
     {
-      sub: "Mouse Click",
+      sub: "mouseClick",
       text: "Clicks the left, middle, or right mouse button.",
-      youtube: "",
-    }
+      youtube: "https://www.youtube.com/embed/bet7_wRLJ6Q?si=DbdqIDu-LGOUjiYQ",
+    },
+    {
+      sub: "moveMouseAndClick",
+      text: "Instantly moves the mouse pointer on your primary screen (multi-monitor setups are not supported). Accepts x and y coordinates. Then clicks left, middle or right after 0.1 second.",
+      youtube: "https://www.youtube.com/embed/hYXWHpSU3SQ?si=TSP8Y6VFDOkdBELI",
+    },
+    {
+      sub: "dragMouse",
+      text: 'Drags the mouse to the specified x and y coordinates. Must be used with mouseToggle "down" at the start and "up" after dragging is complete.',
+      youtube: "https://www.youtube.com/embed/PxnpbXliIKE?si=WkDhEKaeSH0zlMex"
+    },
+    {
+      sub: "getPixelColor",
+      text: "Enter the X and Y coordinates to read the color of the screen at that point. If the color matches, you can trigger additional mouse events. The WAIT input field lets you specify a number of seconds to wait for the pixel color to match. The script will check the color every second, looping until the specified time runs out.",
+      youtube: "https://www.youtube.com/embed/rdbx52uPTvQ?si=hsofN7qhUU5YHDK_"
+    },
+    {
+      sub: "keyTap",
+      text: "Simulates tapping a key on the keyboard. You can also use modifiers like Shift, Alt, or Control, and combine them—for example, Shift + Command.",
+      youtube: "https://www.youtube.com/embed/oRocYm0z1Cg?si=o_qdrpIV0dOe2F7k"
+    },
+    {
+      sub: "typeString",
+      text: "Types out a sentence or string of text.",
+      youtube: "https://www.youtube.com/embed/1uKrHz4aBdQ?si=195o9dkNGNVFS4Oo",
+    },
+    {
+      sub: "moveMouseSmoothAndClick",
+      text: "Moves the mouse pointer smoothly across the screen to the specified coordinates, while its moving the timer will be paused. Then clicks left, middle or right after 0.1 second.",
+      youtube: "https://www.youtube.com/embed/n5B_9up8coc?si=afeIeqFLSUYmCr-w",
+    },
   ]
 }
 
@@ -121,6 +151,10 @@ export const mouseEvents = {
       text: "Moves the mouse pointer smoothly across the screen to the specified coordinates."
     },
     {
+      sub: "moveMouseSmoothAndClick",
+      text: "Moves the mouse pointer smoothly across the screen to the specified coordinates. Then clicks left, middle or right after 0.1 second."
+    },
+    {
       sub: "dragMouse",
       text: 'Drags the mouse to the specified x and y coordinates. Must be used with mouseToggle "down" at the start and "up" after dragging is complete.'
     },
@@ -130,11 +164,7 @@ export const mouseEvents = {
     },
     {
       sub: "keyTap",
-      text: "Simulates tapping a key on the keyboard. You can also use modifiers like Shift, Alt, or Control, and combine them—for example, Shift + Command."
-    },
-    {
-      sub: "keyToggle",
-      text: 'Simulates pressing and releasing a specific key. Use "down" to hold the key and "up" to release it. Can be combined with modifiers like Shift, Control, or Command. It can also be combined E.g shift command.'
+      text: "Simulates tapping a key on the keyboard. You can also use modifiers only [alt, command, control, shift] and combine them—for example, alt command"
     },
     {
       sub: "typeString",

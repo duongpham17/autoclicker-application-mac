@@ -39,7 +39,11 @@ const HelpPage = () => {
             {results.map((el, index) =>
               <ContainerPlain key={el.sub+index}>
                 <Button onClick={() => onOpenArray(el.sub)} open={array.includes(el.sub)}>{el.sub}</Button>
-                {array.includes(el.sub) && <Text color="light">{el.text}</Text>}
+                {array.includes(el.sub) && 
+                  <Fragment>
+                    <Text color="light">{el.text}</Text>
+                  </Fragment>
+                }
               </ContainerPlain>
             )}
           </div>
@@ -54,6 +58,7 @@ const HelpPage = () => {
             {array.includes(el.sub) && 
               <Fragment>
                 <Text color="light">{el.text}</Text>
+                <iframe src={el.youtube} title="YouTube video player" allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" />
               </Fragment>
             }
           </Container>

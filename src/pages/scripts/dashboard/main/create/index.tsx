@@ -44,7 +44,7 @@ const Commands = ({script}: {script: IScriptsApi}) => {
 
     const {onChange, onSubmit, onSetValue, values, onClear, edited} = useForm(initialState, callback, validation);
 
-    async function callback(){
+    function callback(){
         const isMax = script.commands.length >= (script.upgrade * cost);
         if(isMax) return setMaxCmd(true);
         const data = {...script};
@@ -54,7 +54,7 @@ const Commands = ({script}: {script: IScriptsApi}) => {
             if (!values[key as keyof IScriptsCommands]) delete values[key as keyof IScriptsCommands];
         });
         data.commands = [...data.commands, values];
-        await onUpdateScript(data);
+        onUpdateScript(data);
         onClear(initialState);
         setMaxCmd(false);
         border_color.set(values.color);

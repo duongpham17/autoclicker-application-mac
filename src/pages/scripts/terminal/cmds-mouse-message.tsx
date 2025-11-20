@@ -67,6 +67,17 @@ const MoveMouseAndClick = ({cmd}: Props) => {
     )
 };
 
+const MoveMouseSmoothAndClick = ({cmd}: Props) => {
+    return (
+        <Fragment>
+            <Hover message={"Range"}><Flex><Text>{cmd.xyrange||0}</Text><small>&#916;</small></Flex></Hover> <MdKeyboardArrowRight/>
+            <Hover message={"X,Y"}>{`( ${cmd.x || 0} , ${cmd.y || 0} )`}</Hover> <MdKeyboardArrowRight/>
+            <Hover message={"Click"}>{cmd.click}</Hover>
+        </Fragment>
+    )
+};
+
+
 const MoveMouse = ({cmd}: Props) => {
     return (
         <Fragment>
@@ -79,7 +90,7 @@ const MoveMouse = ({cmd}: Props) => {
 const MoveMouseSmooth = ({cmd}: Props) => {
     return (
         <Fragment>
-            <Hover message={"Range"}><Flex><Text>{cmd.xyrange||0}</Text><small>&#916;</small></Flex></Hover> <MdKeyboardArrowRight/>
+            <Hover message={"Range"}><Flex><Text>{cmd.xyrange||0}</Text><small>&#916;</small></Flex></Hover><MdKeyboardArrowRight/>
             <Hover message={"X,Y"}>{`( ${cmd.x || 0} , ${cmd.y || 0} )`}</Hover>
         </Fragment>
     )
@@ -147,6 +158,7 @@ export const mouseMessage = {
     mouseClick: MouseClick,
     mouseToggle: MouseToggle,
     moveMouseAndClick: MoveMouseAndClick,
+    moveMouseSmoothAndClick: MoveMouseSmoothAndClick,
     moveMouse: MoveMouse,
     moveMouseSmooth: MoveMouseSmooth,
     dragMouse: DragMouse,

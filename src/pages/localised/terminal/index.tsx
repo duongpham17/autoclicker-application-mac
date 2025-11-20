@@ -84,11 +84,6 @@ const Terminal = () => {
             update({...cmd, logTimestamp: Date.now(), at_loop: loop_counter, pixel_wait_counter, is_pixel_color });
             break
           };
-          case "keyToggle": {
-            const is_key_tap: any = entry.handler(cmd, ctxOutside, ctxInside);
-            update({...cmd, keyboard:is_key_tap ? cmd.keyboard : `! ${cmd.keyboard}`,logTimestamp: Date.now(), at_loop: loop_counter, pixel_wait_counter, is_pixel_color });
-            break
-          };
           case "keyTap": {
             const is_key_tap: any = entry.handler(cmd, ctxOutside, ctxInside);
             update({...cmd, keyboard:is_key_tap ? cmd.keyboard : `! ${cmd.keyboard}`,logTimestamp: Date.now(), at_loop: loop_counter, pixel_wait_counter, is_pixel_color });

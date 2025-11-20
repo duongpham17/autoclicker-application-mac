@@ -13,7 +13,7 @@ const HomePage = () => {
       <section>
         <Container>
           {user 
-            ? <Link to="/dashboard">Get started making scripts.</Link>
+            ? <Link to="/scripts">Get started making scripts.</Link>
             : <Link to="/login">Login and create an account</Link>
           }
         </Container>
