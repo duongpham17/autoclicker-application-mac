@@ -49,7 +49,7 @@ const Signup = () => {
 
     const initalState = { username: "", password: "", check_password: ""};
 
-    const {values, onChange, onSubmit, loading, validationErrors} = useForm(initalState, callback, validation);
+    const {values, onChange, onSubmit, loading, validationErrors, edited} = useForm(initalState, callback, validation);
 
     async function callback(){
       const isPasswordCorrect = values.password === values.check_password;
@@ -61,39 +61,41 @@ const Signup = () => {
     <Fragment>
       <Form onSubmit={onSubmit}>
 
-        <Input 
-          label1="Username" 
-          label2={validationErrors.username}
-          error={validationErrors.username} 
-          placeholder="Enter your username"
-          name="username" 
-          value={values.username} 
-          onChange={onChange} 
-        />
+          <Container>
+          <Input 
+            label1="Username" 
+            label2={validationErrors.username}
+            error={validationErrors.username} 
+            placeholder="Enter your username"
+            name="username" 
+            value={values.username} 
+            onChange={onChange} 
+          />
 
-        <Input 
-          label1="Password" 
-          label2={validationErrors.password}
-          error={validationErrors.password} 
-          placeholder="Password" 
-          name="password" 
-          value={values.password} 
-          onChange={onChange} 
-        />
+          <Input 
+            label1="Password" 
+            label2={validationErrors.password}
+            error={validationErrors.password} 
+            placeholder="Password" 
+            name="password" 
+            value={values.password} 
+            onChange={onChange} 
+          />
 
-        <Input 
-          label1="Check Password" 
-          label2={validationErrors.check_password}
-          error={validationErrors.check_password} 
-          placeholder="Check Password" 
-          name="check_password" 
-          value={values.check_password} 
-          onChange={onChange} 
-        />
+          <Input 
+            label1="Check Password" 
+            label2={validationErrors.check_password}
+            error={validationErrors.check_password} 
+            placeholder="Check Password" 
+            name="check_password" 
+            value={values.check_password} 
+            onChange={onChange} 
+          />
+        </Container>
 
         {errors.signup && <Container color="red"><Text color='red'>{errors.signup}</Text></Container>}
 
-        <Button type="submit" loading={loading} color="primary">Create account</Button>
+        {edited && <Button type="submit" loading={loading} color="primary">Create account</Button>}
 
       </Form>
     </Fragment>

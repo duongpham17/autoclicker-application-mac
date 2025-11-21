@@ -49,24 +49,26 @@ const Signin = () => {
 
       <Form onSubmit={onSubmit}>
       
-        <Input 
-          label1="Username or Email" 
-          error={validationErrors.username} 
-          placeholder="..." 
-          name="username" 
-          value={values.username} 
-          onChange={onChange} 
-        />
+        <Container>
+          <Input 
+            label1="Username or Email" 
+            error={validationErrors.username} 
+            placeholder="..." 
+            name="username" 
+            value={values.username} 
+            onChange={onChange} 
+          />
 
-        <Input 
-          label1="Password" 
-          type="password"
-          error={validationErrors.password} 
-          placeholder="..." 
-          name="password" 
-          value={values.password} 
-          onChange={onChange} 
-        />
+          <Input 
+            label1="Password" 
+            type="password"
+            error={validationErrors.password} 
+            placeholder="..." 
+            name="password" 
+            value={values.password} 
+            onChange={onChange} 
+          />
+        </Container>
         
         {errors.login && <Container color="red"><Text color='red'>{errors.login}</Text></Container>}
                   
