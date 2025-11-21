@@ -17,10 +17,6 @@ const ProfilePage = () => {
         <div className={styles.container}>
 
             <Container style={style} color={color}>
-                <Orders />
-            </Container>
-
-            <Container style={style} color={color}>
                 <Username />
             </Container>
 
@@ -30,6 +26,10 @@ const ProfilePage = () => {
             
             <Container style={style} color={color}>
                 <Password />
+            </Container>
+
+            <Container style={style} color={color}>
+                <Orders />
             </Container>
             
             <Container style={style} color={color}>

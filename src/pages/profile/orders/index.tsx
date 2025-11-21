@@ -33,7 +33,7 @@ const OrdersContainer = () => {
 
   return (
     <>
-      <button onClick={customOpen}>Order History</button>
+      <button onClick={customOpen}>Payment History</button>
 
       {open && 
         <Cover open={open} onClose={onOpen}>
@@ -46,8 +46,8 @@ const OrdersContainer = () => {
                 {orders?.map((el, index) => 
                   <Container key={el._id}>
                     <Text color="light">{index+1}. {new Date(el.createdAt).toISOString().split("T").join(", ").split(".")[0]}</Text>
+                    {el.email && <Text>{el.email}</Text>}
                     <Text>£{(el.credit * cost).toFixed(2)} - Credit [ {el.credit} ]</Text>
-                    <Text color="light">{el.email}</Text>
                   </Container>
                 )}
               </Fragment>
