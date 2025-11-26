@@ -94,7 +94,7 @@
       "buildResources": "assets/mac"
     },
     "mac": {
-      "identity": "Tung Pham (FCHJ59B22R)",
+      "identity": "tung pham (FCHJ59B22R)",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "assets/mac/entitlements.mac.plist",
