@@ -94,7 +94,7 @@
       "buildResources": "assets/mac"
     },
     "mac": {
-      "identity": "Developer ID Application: Tung Pham (FCHJ59B22R)",
+      "identity": "Tung Pham (FCHJ59B22R)",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "assets/mac/entitlements.mac.plist",
