@@ -71,6 +71,16 @@
   "build": {
     "appId": "com.tungpham.autoclicker",
     "productName": "AutoClicker",
+    "afterSign": "scripts/notarize.js",
+    "target": [
+      {
+        "target":"default",
+        "arch": [
+          "universal"
+        ]
+      }
+    ],
+    "entitlements": "assets/mac/entitlements.mac.plist",
     "publish": [
       {
         "provider": "github",
@@ -86,6 +96,11 @@
       "buildResources": "assets/icons"
     },
     "mac": {
+      "identity": "Developer ID Application: tung pham (FCHJ59B22R)",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "assets/mac/entitlements.mac.plist",
+      "entitlementsInherit": "assets/mac/entitlements.mac.plist",
       "icon": "mac/512x512.icns",
       "target": "dmg"
     }

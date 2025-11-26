@@ -1,5 +1,6 @@
 import styles from './Help.module.scss';
 import { Fragment, useState } from 'react';
+import { Link } from 'react-router-dom';
 import useOpen from '@hooks/useOpen';
 import {mouseEvents, mouseData, inputFields, seconds, permissions, scripts, videos} from './data';
 import Container from '@components/containers/Style1';
@@ -52,13 +53,13 @@ const HelpPage = () => {
 
       <section key={videos.title} id={videos.title}>
         <h2>{videos.title}</h2>
-        {videos.data.map(el => 
+        {videos.data.map((el, index) => 
           <Container color="dark" key={el.sub}>
             <Button onClick={() => onOpenArray(el.sub)} open={array.includes(el.sub)}>{el.sub}</Button>
             {array.includes(el.sub) && 
               <Fragment>
-                <Text color="light">{el.text}</Text>
-                <iframe src={el.youtube} title="YouTube video player" allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" />
+                <Text color="light">{el.text}</Text>  
+                <Link to={el.youtube} target="_blank" rel="noopener noreferrer"><Text>Watch Epsiode ({index+1})</Text></Link>
               </Fragment>
             }
           </Container>
