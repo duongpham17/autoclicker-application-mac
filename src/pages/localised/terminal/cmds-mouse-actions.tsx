@@ -9,12 +9,13 @@ export type TScriptsCommandsCustomised = IScriptsCommands & {
 
 export const ScriptKeyed = (script: IScriptsApi) => {
   let seconds = 0;
-  const newObject: {[key: number]: IScriptsCommands} = {};
-  for(let x of script.commands){
+  const newObject: { [key: number]: IScriptsCommands } = {};
+  for (let x of script.commands) {
     seconds += x.seconds;
+    seconds = Math.round(seconds * 10) / 10;
     newObject[seconds] = x;
-  };
-  return newObject
+  }
+  return newObject;
 };
 
 export const random_range = (value: number | string, range?: number | string) => {
