@@ -7,13 +7,13 @@ package.json - publish - make sure the repo is pointing to the correct place
 ```
 export APPLE_ID="example@icloud.com"
 export APPLE_APP_SPECIFIC_PASSWORD="app-specific-password"
-export ASC_PROVIDER="teamid"
+export APPLE_TEAM_ID="teamid"
 ```
 Check if its in the environment
 ```
 echo $APPLE_ID
 echo $APPLE_APP_SPECIFIC_PASSWORD
-echo $ASC_PROVIDER
+echo $APPLE_TEAM_ID
 ```
 
 # Before releasing
