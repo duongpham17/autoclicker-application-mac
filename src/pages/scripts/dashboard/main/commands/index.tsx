@@ -124,7 +124,7 @@ const Commands = ({script}: {script: IScriptsApi}) => {
                     <Between>
                         <Flex>
                             <Hover message={"Index"}><Text color="light">{`${index+1}.`}</Text></Hover>
-                            <Hover message={"Total Seconds"}><Text color="light">{`${onIncrementalSeconds(el.seconds, index)}.`}</Text></Hover>
+                            <Hover message={"Total Seconds"}><Text color="light">{`${onIncrementalSeconds(el.seconds, index).toFixed(2)}.`}</Text></Hover>
                             <Hover message={"Name"}><Text color="light">{el.name.toUpperCase()} </Text></Hover>
                             <div className={styles.actions}>
                                 <Hover message="Edit"><Icon onClick={() => setEdit(el)} color="dark"><MdEdit /></Icon></Hover>

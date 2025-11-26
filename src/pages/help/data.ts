@@ -100,11 +100,11 @@ export const permissions = {
   data: [
     {
       sub: "Mac users, mouse not working",
-      text: `Go to "System settings" -> "privacy & security" -> "accessibility" -> add the application to the list. Restart application.`
+      text: `Go to "System settings" -> "privacy & security" -> "accessibility" -> add the application to the list. Restart application. If you still have issues, delete the autoclicker and add it again.`
     },
     {
       sub: "Mac users, mouse cant find location",
-      text: `Go to "System settings" -> "privacy & security" -> "Screen & System Audio Recoding" -> add the application to the list. Restart Application.`
+      text: `Go to "System settings" -> "privacy & security" -> "Screen & System Audio Recoding" -> add the application to the list. Restart Application. If you still have issues, delete the autoclicker and add it again.`
     },
     {
       sub: "Windows users, if nothing is clicking or working",
