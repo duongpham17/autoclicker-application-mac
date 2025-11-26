@@ -1,6 +1,7 @@
 {
   "name": "autoclicker",
   "author": "Tung Pham",
+  "description": "AutoClicker desktop app for automating clicks",
   "version": "1.0.0",
   "private": true,
   "main": "public/electron.js",
@@ -74,13 +75,10 @@
     "afterSign": "scripts/notarize.js",
     "target": [
       {
-        "target":"default",
-        "arch": [
-          "universal"
-        ]
+        "target": "default",
+        "arch": ["universal"]
       }
     ],
-    "entitlements": "assets/mac/entitlements.mac.plist",
     "publish": [
       {
         "provider": "github",
@@ -90,19 +88,19 @@
     ],
     "files": [
       "build/**/*",
-      "public/electron.js"
+      "build/electron-production.js"
     ],
     "directories": {
-      "buildResources": "assets/icons"
+      "buildResources": "assets/mac"
     },
     "mac": {
-      "identity": "Developer ID Application: tung pham (FCHJ59B22R)",
+      "identity": "Developer ID Application: Tung Pham (FCHJ59B22R)",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "assets/mac/entitlements.mac.plist",
       "entitlementsInherit": "assets/mac/entitlements.mac.plist",
       "icon": "assets/mac/512x512.icns",
-      "target": "dmg"
+      "target": ["dmg"]
     }
   }
 }
