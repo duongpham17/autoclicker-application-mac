@@ -101,7 +101,7 @@
       "gatekeeperAssess": false,
       "entitlements": "assets/mac/entitlements.mac.plist",
       "entitlementsInherit": "assets/mac/entitlements.mac.plist",
-      "icon": "mac/512x512.icns",
+      "icon": "assets/mac/512x512.icns",
       "target": "dmg"
     }
   }
