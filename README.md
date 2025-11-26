@@ -3,6 +3,19 @@
 # Autoupdate
 package.json - publish - make sure the repo is pointing to the correct place
 
+# Notarize, add to terminal environment before "npm run dist"
+```
+export APPLE_ID="example@icloud.com"
+export APPLE_APP_SPECIFIC_PASSWORD="app-specific-password"
+export ASC_PROVIDER="teamid"
+```
+Check if its in the environment
+```
+echo $APPLE_ID
+echo $APPLE_APP_SPECIFIC_PASSWORD
+echo $ASC_PROVIDER
+```
+
 # Before releasing
 1) change package.json version
 2) check public/electron.js is set to production
