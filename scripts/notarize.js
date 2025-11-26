@@ -3,16 +3,22 @@ const { notarize } = require('@electron/notarize');
 exports.default = async function notarizing(context) {
   const { electronPlatformName, appOutDir } = context;
 
-  // Only notarize for macOS
-  if (electronPlatformName !== 'darwin') {
+  if (electronPlatformName !== 'darwin') return;
+
+  const appName = context.packager.appInfo.productFilename;
+
+  if (!process.env.APPLE_ID || !process.env.APPLE_ID_PASSWORD || !process.env.ASC_PROVIDER) {
+    console.log("Notarization skipped — missing APPLE_ID, APPLE_ID_PASSWORD, or ASC_PROVIDER");
     return;
   }
 
-  const appName = context.packager.appInfo.productFilename;
+  console.log("Notarizing with Apple...");
 
   return await notarize({
     appBundleId: "com.tungpham.autoclicker",
     appPath: `${appOutDir}/${appName}.app`,
-    keychainProfile: "AC_PASSWORD"
+    appleId: process.env.APPLE_ID,
+    appleIdPassword: process.env.APPLE_ID_PASSWORD,
+    ascProvider: process.env.ASC_PROVIDER,
   });
 };
