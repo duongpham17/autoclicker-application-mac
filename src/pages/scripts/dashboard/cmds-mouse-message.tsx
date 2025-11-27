@@ -60,7 +60,7 @@ const MoveMouse = ({cmd}: {cmd: IScriptsCommands}) => {
     return (
         <Fragment>
             <Hover message={"Range"}><Flex><Text size={font_size}>{cmd.xyrange || 0}</Text><small>&#916;</small></Flex></Hover> <MdKeyboardArrowRight/>
-            <Hover message={"X,Y"}><Text size={font_size}>{`( ${cmd.x || "?"} , ${cmd.y || "?"} )`}</Text></Hover> <MdKeyboardArrowRight/>
+            <Hover message={"X,Y"}><Text size={font_size}>{`( ${cmd.x || "?"} , ${cmd.y || "?"} )`}</Text></Hover>
         </Fragment>
     )
 };
@@ -78,7 +78,7 @@ const DragMouse = ({cmd}: {cmd: IScriptsCommands}) => {
     return (
         <Fragment>
             <Hover message={"Range"}><Flex><Text size={font_size}>{cmd.xyrange || 0}</Text><small>&#916;</small></Flex></Hover> <MdKeyboardArrowRight/>
-            <Hover message={"X,Y"}><Text size={font_size}>{`( ${cmd.x || "?"} , ${cmd.y || "?"} )`}</Text></Hover> <MdKeyboardArrowRight/>
+            <Hover message={"X,Y"}><Text size={font_size}>{`( ${cmd.x || "?"} , ${cmd.y || "?"} )`}</Text></Hover>
         </Fragment>
     )
 };

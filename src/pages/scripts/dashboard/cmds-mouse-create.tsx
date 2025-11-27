@@ -23,7 +23,7 @@ export const Constant = ({values, onSetValue, onChange}:Props) => {
                 <Options2 
                     label1="Event"
                     options={RobotjsEvents.map(el => ({name: el.robot, des: el.description}))} 
-                    onClick={(name) => onSetValue({event: name, pixel_event: name==="getPixelColor"?"mouseClick":undefined})}
+                    onClick={(name) => onSetValue({event: name, click: name==="getPixelColor"?"left":undefined, pixel_event: name==="getPixelColor"?"mouseClick":undefined})}
                     value={values.event} 
                 /> 
                 {values.event !== "" &&
@@ -349,7 +349,7 @@ export const KeyTap = ({values, onChange}: Props) => {
                 <Input  
                     label1="Modifiers"
                     name="modifiers"
-                    placeholder='E.g shift, control, alt, command etc...'
+                    placeholder='Allowed [ shift, control, alt, command ]'
                     value={values.modifiers || ""}
                     onChange={onChange}
                 />
@@ -413,6 +413,7 @@ export const GetPixelColor = ({values, onChange, onSetValue}: Props) => {
                     label1="Pixel Event" 
                     options={RobotjsPixelEvents.map(el => ({name: el.robot, des: el.description}))} 
                     onClick={(name) => onSetValue({pixel_event: name})}
+                    value={values.pixel_event} 
                 />
                 <Input  
                     label1="Pixel X"

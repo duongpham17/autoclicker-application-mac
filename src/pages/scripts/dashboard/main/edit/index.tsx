@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import { Context } from '../../../Context';
 import { IScriptsApi, IScriptsCommands } from '@redux/types/scripts';
+import { Constant, mouseEvents } from '../../cmds-mouse-create';
+import { mouseClean } from '../../cmds-mouse-clean';
 import validation from './validation';
 import useForm from '@hooks/useForm';
 import Cover from '@components/covers/Style2';
 import Button from '@components/buttons/Style1';
 import Form from '@components/forms/Style1';
 import Container from '@components/containers/Style1';
-import {Constant, mouseEvents} from '../../cmds-mouse-create';
 
 const EditCommand = ({script, edit}: {script: IScriptsApi, edit: IScriptsCommands}) => {
 
@@ -16,26 +17,28 @@ const EditCommand = ({script, edit}: {script: IScriptsApi, edit: IScriptsCommand
     const {onChange, onSubmit, onSetValue, values, onClear, edited} = useForm(edit, callback, validation);
 
     function callback(){
-        const data = {...script};
-        values.seconds = Number(values.seconds);
-        values.delay_at_loop = Number(values.delay_at_loop);
-        if(!values.toggle) delete values.toggle;
-        if(!values.keyboard) delete values.keyboard;
-        if(!values.type) delete values.type;
-        if(!values.x) delete values.x;
-        if(!values.y) delete values.y;
-        if(!values.pixel_event) delete values.pixel_event;
-        if(!values.pixel_color) delete values.pixel_color;
-        data.commands = data.commands.map(el => el._id === values._id ? values : el);
-        onUpdateScript(data);
+        const _data = {...script};
+        if(values.event === "getPixelColor"){
+            type TMouseClean = keyof typeof mouseClean;
+            const cleaned_pixel = mouseClean[values.event as TMouseClean](values);
+            const cleaned_normal = mouseClean[values.pixel_event as TMouseClean](values);
+            const removeUndefined = (obj: typeof cleaned_pixel | typeof cleaned_normal) => Object.fromEntries(Object.entries(obj).filter(([_, v]) => v !== undefined));
+            const cleaned = {...removeUndefined(cleaned_normal), ...removeUndefined(cleaned_pixel)} as unknown as IScriptsCommands;
+            _data.commands = _data.commands.map(el => el._id === values._id ? cleaned : el);
+        } else {
+            type TMouseClean = keyof typeof mouseClean;
+            const cleaned = mouseClean[values.event as TMouseClean](values);
+            _data.commands = _data.commands.map(el => el._id === values._id ? cleaned : el);
+        }
+        onUpdateScript(_data);
         setEdit(null);
         onClear();
     };
 
     const onDelete = () => {
-        const data = {...script};
-        data.commands = data.commands.filter(el => el._id !== values._id);
-        onUpdateScript(data);
+        const _data = {...script};
+        _data.commands = _data.commands.filter(el => el._id !== values._id);
+        onUpdateScript(_data);
         setEdit(null);
     };
 

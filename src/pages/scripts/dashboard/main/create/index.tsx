@@ -1,8 +1,12 @@
 import { useContext, useState } from 'react';
 import { Context } from '../../../Context';
-import { IScriptsApi, IScriptsCommands } from '@redux/types/scripts';
-import { generateid } from '@utils';
+import { IScriptsApi } from '@redux/types/scripts';
 import { border_color } from '@localstorage';
+import { generateid } from '@utils';
+import { ObjectId } from 'bson';
+import { Constant, mouseEvents } from '../../cmds-mouse-create';
+import { initialState, mouseClean } from '../../cmds-mouse-clean';
+import { MdArrowUpward } from "react-icons/md";
 import validation from './validation';
 import useForm from '@hooks/useForm';
 import Button from '@components/buttons/Style1';
@@ -10,9 +14,6 @@ import Text from '@components/texts/Style1';
 import Container from '@components/containers/Style1';
 import Between from '@components/flex/Between'
 import Icon from '@components/icons/Style2';
-import { ObjectId } from 'bson';
-import {Constant, mouseEvents} from '../../cmds-mouse-create';
-import { MdArrowUpward } from "react-icons/md";
 
 const Commands = ({script}: {script: IScriptsApi}) => {
 
@@ -20,45 +21,26 @@ const Commands = ({script}: {script: IScriptsApi}) => {
 
     const [maxCmd, setMaxCmd] = useState(false);
 
-    const initialState: IScriptsCommands = {
-        _id: (new ObjectId()).toString(),
-        name: generateid(1),
-        seconds: 0,
-        delay_at_loop: 0,
-        color: border_color.get() || "#191919",
-        event: "",
-        click: "left",
-        toggle: "down",
-        modifiers: undefined,
-        keyboard: undefined,
-        type: undefined,
-        xyrange: undefined,
-        x: undefined,
-        y: undefined,
-        pixel_event: undefined,
-        pixel_color: undefined,
-        pixel_x: undefined,
-        pixel_y: undefined,
-        pixel_wait: undefined,
-    };
-
     const {onChange, onSubmit, onSetValue, values, onClear, edited} = useForm(initialState, callback, validation);
 
     function callback(){
         const isMax = script.commands.length >= (script.upgrade * cost);
         if(isMax) return setMaxCmd(true);
         const data = {...script};
-        values.seconds = Number(values.seconds);
-        values.delay_at_loop = Number(values.delay_at_loop);
-        ["toggle", "keyboard", "modifiers", "type", "x", "y", "xyrange", "pixel_event", "pixel_x", "pixel_y", "pixel_wait", "pixel_color", "pixel_wait"].forEach((key) => {
-            if (!values[key as keyof IScriptsCommands]) delete values[key as keyof IScriptsCommands];
-        });
-        data.commands = [...data.commands, values];
+        type TMouseClean = keyof typeof mouseClean;
+        const cleaned = mouseClean[values.event as TMouseClean](values);
+        data.commands = [...data.commands, cleaned];
         onUpdateScript(data);
+        //clean up state
         onClear(initialState);
         setMaxCmd(false);
         border_color.set(values.color);
-        onSetValue({color: values.color, seconds: values.seconds})
+        onSetValue({
+            _id: (new ObjectId()).toString(),
+            name: generateid(1),
+            color: values.color, 
+            seconds: values.seconds
+        })
     };
 
     return (
